@@ -1,2 +1,5 @@
 example:
   - hello:
+ranking:
+  - initDatabase:
+  - getRanking:

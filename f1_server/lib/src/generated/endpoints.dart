@@ -11,12 +11,14 @@ import 'package:serverpod/serverpod.dart';
 import 'protocol.dart';
 
 import '../endpoints/example_endpoint.dart';
+import '../endpoints/ranking_endpoint.dart';
 
 class Endpoints extends EndpointDispatch {
   @override
   void initializeEndpoints(Server server) {
     var endpoints = <String, Endpoint>{
       'example': ExampleEndpoint()..initialize(server, 'example', null),
+      'ranking': RankingEndpoint()..initialize(server, 'ranking', null),
     };
 
     connectors['example'] = EndpointConnector(
@@ -33,6 +35,38 @@ class Endpoints extends EndpointDispatch {
             return (endpoints['example'] as ExampleEndpoint).hello(
               session,
               params['name'],
+            );
+          },
+        ),
+      },
+    );
+
+    connectors['ranking'] = EndpointConnector(
+      name: 'ranking',
+      endpoint: endpoints['ranking']!,
+      methodConnectors: {
+        'initDatabase': MethodConnector(
+          name: 'initDatabase',
+          params: {
+            'json': ParameterDescription(
+                name: 'json', type: String, nullable: false),
+            'type': ParameterDescription(
+                name: 'type', type: String, nullable: false),
+          },
+          call: (Session session, Map<String, dynamic> params) async {
+            return (endpoints['ranking'] as RankingEndpoint).initDatabase(
+              session,
+              params['json'],
+              params['type'],
+            );
+          },
+        ),
+        'getRanking': MethodConnector(
+          name: 'getRanking',
+          params: {},
+          call: (Session session, Map<String, dynamic> params) async {
+            return (endpoints['ranking'] as RankingEndpoint).getRanking(
+              session,
             );
           },
         ),

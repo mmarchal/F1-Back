@@ -1,0 +1,7 @@
+class: Pilot
+table: pilot
+fields:
+  firstName: String
+  lastName: String
+  team: Team
+  country: String

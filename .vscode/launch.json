@@ -14,7 +14,8 @@
             "name": "f1_flutter",
             "cwd": "f1_flutter",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "deviceId": "chrome"
         },
         {
             "name": "f1_flutter (profile mode)",
@@ -34,7 +35,8 @@
             "name": "f1_server",
             "cwd": "f1_server",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug"
         }
     ]
 }

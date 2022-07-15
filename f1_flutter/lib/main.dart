@@ -1,5 +1,6 @@
 import 'package:f1_client/f1_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Sets up a singleton client object that can be used to talk to the server from
 // anywhere in our app. The client is generated from your server code.
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 // production servers.
 var client = Client('http://localhost:8080/');
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
 }
 
@@ -58,6 +59,27 @@ class _MyHomePageState extends State<MyHomePage> {
         _errorMessage = '$e';
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    client.ranking.getRanking().then((ranking) {
+      if (ranking == null) {
+        initDatas();
+      } else {
+        debugPrint("Ranking already exists");
+      }
+    });
+  }
+
+  Future<void> initDatas() async {
+    final String jsonTeams = await rootBundle.loadString('data/teams.json');
+    await client.ranking.initDatabase(jsonTeams, "Team");
+    final String jsonPilots = await rootBundle.loadString('data/pilots.json');
+    await client.ranking.initDatabase(jsonPilots, "Pilot");
+    final String jsonRanking = await rootBundle.loadString('data/ranking.json');
+    await client.ranking.initDatabase(jsonRanking, "Ranking");
   }
 
   @override

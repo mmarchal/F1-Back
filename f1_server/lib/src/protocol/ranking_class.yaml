@@ -1,0 +1,6 @@
+class: Ranking
+table: ranking
+fields:
+  rank: int
+  pilot: Pilot
+  points: int

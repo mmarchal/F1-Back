@@ -24,8 +24,31 @@ class _EndpointExample extends EndpointRef {
   }
 }
 
+class _EndpointRanking extends EndpointRef {
+  @override
+  String get name => 'ranking';
+
+  _EndpointRanking(EndpointCaller caller) : super(caller);
+
+  Future<void> initDatabase(
+    String json,
+    String type,
+  ) async {
+    return await caller.callServerEndpoint('ranking', 'initDatabase', 'void', {
+      'json': json,
+      'type': type,
+    });
+  }
+
+  Future<Ranking?> getRanking() async {
+    return await caller
+        .callServerEndpoint('ranking', 'getRanking', 'Ranking', {});
+  }
+}
+
 class Client extends ServerpodClient {
   late final _EndpointExample example;
+  late final _EndpointRanking ranking;
 
   Client(String host,
       {SecurityContext? context,
@@ -36,11 +59,13 @@ class Client extends ServerpodClient {
             errorHandler: errorHandler,
             authenticationKeyManager: authenticationKeyManager) {
     example = _EndpointExample(this);
+    ranking = _EndpointRanking(this);
   }
 
   @override
   Map<String, EndpointRef> get endpointRefLookup => {
         'example': example,
+        'ranking': ranking,
       };
 
   @override
