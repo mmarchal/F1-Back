@@ -44,6 +44,11 @@ class _EndpointRanking extends EndpointRef {
     return await caller
         .callServerEndpoint('ranking', 'getRanking', 'Ranking', {});
   }
+
+  Future<List<Ranking>> getAllRanking() async {
+    return await caller
+        .callServerEndpoint('ranking', 'getAllRanking', 'List<Ranking>', {});
+  }
 }
 
 class Client extends ServerpodClient {

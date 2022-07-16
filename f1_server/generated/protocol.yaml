@@ -3,3 +3,4 @@ example:
 ranking:
   - initDatabase:
   - getRanking:
+  - getAllRanking:

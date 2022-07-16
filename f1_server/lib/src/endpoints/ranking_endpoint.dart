@@ -51,4 +51,11 @@ class RankingEndpoint extends Endpoint {
     var ranking = await Ranking.findSingleRow(session);
     return ranking;
   }
+
+  Future<List<Ranking>> getAllRanking(Session session) async {
+    var rankings = await Ranking.find(session);
+    print(rankings);
+    //https://github.com/serverpod/serverpod/discussions/102
+    return rankings;
+  }
 }

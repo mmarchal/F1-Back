@@ -70,6 +70,15 @@ class Endpoints extends EndpointDispatch {
             );
           },
         ),
+        'getAllRanking': MethodConnector(
+          name: 'getAllRanking',
+          params: {},
+          call: (Session session, Map<String, dynamic> params) async {
+            return (endpoints['ranking'] as RankingEndpoint).getAllRanking(
+              session,
+            );
+          },
+        ),
       },
     );
   }
