@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:f1_client/f1_client.dart';
+import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -98,12 +99,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 '${ranking.rank} - ${ranking.pilot.firstName} ${ranking.pilot.lastName}',
                 style: const TextStyle(fontSize: 18),
               ),
+              leading: Flag.fromString(
+                getFlagFromCountry(ranking.pilot.country.toLowerCase()),
+                height: 40,
+                width: 40,
+                fit: BoxFit.fill,
+                replacement: Text('${ranking.pilot.country} not found'),
+              ),
               subtitle: Text(
-                '${ranking.pilot.country} - ${ranking.pilot.team.name}',
+                ranking.pilot.team.name,
                 style: const TextStyle(fontSize: 14),
               ),
               trailing: Text(
-                '${ranking.points}',
+                '${ranking.points} pts',
                 style: const TextStyle(fontSize: 18),
               ),
             );
@@ -111,5 +119,92 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  String getFlagFromCountry(String lowerCase) {
+    switch (lowerCase) {
+      case 'france':
+        return 'fr';
+      case 'germany':
+        return 'de';
+      case 'italy':
+        return 'it';
+      case 'spain':
+        return 'es';
+      case 'united states':
+        return 'us';
+      case 'england':
+        return 'gb';
+      case 'australia':
+        return 'au';
+      case 'japan':
+        return 'jp';
+      case 'china':
+        return 'cn';
+      case 'russia':
+        return 'ru';
+      case 'brazil':
+        return 'br';
+      case 'canada':
+        return 'ca';
+      case 'austria':
+        return 'at';
+      case 'belgium':
+        return 'be';
+      case 'denmark':
+        return 'dk';
+      case 'finland':
+        return 'fi';
+      case 'holland':
+        return 'nl';
+      case 'hungary':
+        return 'hu';
+      case 'iceland':
+        return 'is';
+      case 'ireland':
+        return 'ie';
+      case 'luxembourg':
+        return 'lu';
+      case 'netherlands':
+        return 'nl';
+      case 'poland':
+        return 'pl';
+      case 'portugal':
+        return 'pt';
+      case 'switzerland':
+        return 'ch';
+      case 'czech republic':
+        return 'cz';
+      case 'romania':
+        return 'ro';
+      case 'serbia':
+        return 'rs';
+      case 'slovakia':
+        return 'sk';
+      case 'slovenia':
+        return 'si';
+      case 'sweden':
+        return 'se';
+      case 'turkey':
+        return 'tr';
+      case 'ukraine':
+        return 'ua';
+      case 'belarus':
+        return 'by';
+      case 'bulgaria':
+        return 'bg';
+      case 'croatia':
+        return 'hr';
+      case 'greece':
+        return 'gr';
+      case 'monaco':
+        return 'mc';
+      case 'danmark':
+        return 'dk';
+      case 'thailand':
+        return 'th';
+      default:
+        return lowerCase;
+    }
   }
 }

@@ -12,6 +12,10 @@ _Fix_
 
 - Change return of ranking Endpoint because object is not returned in this serverpod version
 
+_Feat_
+
+- Add flag of drivers country
+
 # 1.0.0
 
 - Initial version, created by Stagehand
