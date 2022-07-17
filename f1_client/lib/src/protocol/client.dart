@@ -45,9 +45,9 @@ class _EndpointRanking extends EndpointRef {
         .callServerEndpoint('ranking', 'getRanking', 'Ranking', {});
   }
 
-  Future<List<Ranking>> getAllRanking() async {
+  Future<String> getAllRanking() async {
     return await caller
-        .callServerEndpoint('ranking', 'getAllRanking', 'List<Ranking>', {});
+        .callServerEndpoint('ranking', 'getAllRanking', 'String', {});
   }
 }
 

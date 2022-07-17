@@ -52,10 +52,9 @@ class RankingEndpoint extends Endpoint {
     return ranking;
   }
 
-  Future<List<Ranking>> getAllRanking(Session session) async {
+  Future<String> getAllRanking(Session session) async {
     var rankings = await Ranking.find(session);
-    print(rankings);
-    //https://github.com/serverpod/serverpod/discussions/102
-    return rankings;
+    var json = jsonEncode(rankings.map((e) => e.toString()).toList());
+    return json;
   }
 }

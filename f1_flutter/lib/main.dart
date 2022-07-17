@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:f1_client/f1_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,8 +59,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<List<Ranking>> _getDatas() async {
+    List<Ranking> rankingsReturn = <Ranking>[];
     final response = await client.ranking.getAllRanking();
-    return response;
+    final data = await jsonDecode(response);
+    data.forEach((d) {
+      rankingsReturn.add(
+        Ranking.fromSerialization(
+          jsonDecode(d),
+        ),
+      );
+    });
+    return rankingsReturn;
   }
 
   Future<void> initDatas() async {
